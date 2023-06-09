@@ -72,12 +72,19 @@ reset_color='\[\e[0m\]' # 색상 리셋
 ## export PS1="-->\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$(parse_git_branch)\$ "
 
 ## PS1 option 2
-alias branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ ${PARENCLR}(${BRANCHCLR}\1${PARENCLR}\)/p'"
-
+branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ ${PARENCLR}(${BRANCHCLR}\1${PARENCLR}\)/p'"
 GIT_STATUS='$(branchname)'
-
+#PROMPT_CHAR=" \[\e[0m\]\$"
 PROMPT_CHAR="\$"
-PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]\[$reset\]\w\[$cyan\]\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
+ 
+source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+
+#PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]\[$reset\]\w\[$cyan\]\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
+#PS1='${green}\u${cyan}@${red}\h${reset} \w${cyan}$(__git_ps1 " (%s)")${reset}$ '
+#PS1='${green}\u${cyan}@${red}\h${reset} \w${cyan}$(__git_ps1 " (${lightred}%s${cyan})")${reset}$ '
+ PS1='\[\e[0;32m\]\u\[\e[1;36m\]@\[\e[91m\]\h\[\e[0m\] \w\[\e[0;33m\]$(__git_ps1 " \[\e[0;36m\](\[\e[0;91m\]%s\[\e[0;36m)")\[\e[0m\]\$ '
+#PS1='\e[32m\]\u\e[36m\]@\e[91m\]\h\e[0m\] \w\e[33m\]$(__git_ps1 " (%s)")\e[0m$ '
+
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
